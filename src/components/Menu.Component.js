@@ -10,6 +10,7 @@ const MenuComponent = () => {
 
     useEffect(() => {
         console.log(location);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

@@ -4,17 +4,19 @@ import MenuComponent from '../components/Menu.Component';
 import SearchComponent from '../components/Search.Component';
 import { searchBooks, reduceText } from '../services/Search.Service';
 import { FaImage } from 'react-icons/fa'
-import { useDispatch, useSelector } from 'react-redux'
-import { addFavorite, removeFavorite } from '../store/Favorites/Favorites.Actions'
+import { useDispatch } from 'react-redux'
+import { addFavorite } from '../store/Favorites/Favorites.Actions'
 
 import HeaderComponent from './../components/Header.Component';
 import MainLayout from './../layouts/MainLayout';
+import PaginationComponent from '../components/Pagination.Component';
 
 const SearchPage = () => {
 
     // states
     const [search, setSearch] = useState("");
     const [books, setBooks] = useState([]);
+    const [index, setIndex] = useState(0);
 
     // redux
     const listener = useDispatch();
@@ -24,16 +26,27 @@ const SearchPage = () => {
         setSearch(e.target.value);
     }
 
+    // change the index value
+    const addIndexValue = () => {
+        setIndex(index + 20);
+        getBooks();
+    }
+
+    const removeIndexValue = () => {
+        setIndex(index - 20);
+        getBooks();
+    }
+
     // retireve books
     const getBooks = () => {
-        const response = searchBooks(search);
+        const response = searchBooks(search, index);
         response.then((value) => setBooks(value.items)).catch((e) => console.log(e));
     }
 
     useEffect(() => {
         console.log(books);
-
-    }, [books]);
+        console.log(index);
+    }, [books, index]);
 
     return (
         <>
@@ -70,7 +83,22 @@ const SearchPage = () => {
                         }
                     />
                 }
-                columnLeft={<MenuComponent />} />
+                columnLeft={
+                    <div>
+                        <MenuComponent />
+                        {
+                            books.length > 0
+                                ?
+                                <PaginationComponent
+                                    onRemove={() => removeIndexValue()}
+                                    onAdd={() => addIndexValue()}
+                                />
+                                : <></>
+
+                        }
+                    </div>
+                }
+            />
         </>
     );
 }

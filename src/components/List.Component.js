@@ -4,11 +4,11 @@ import { FaExclamationCircle } from 'react-icons/fa'
 
 const ListComponent = ({ items }) => {
     return (
-        <>
+        <div style={{ height: '65vh', overflow: 'auto', paddingRight: '2rem', marginTop: '2rem' }}>
             {
                 items.length > 0
                     ? <>
-                        <p className='mt-5 text-primary' style={{ marginBottom: '-15px' }}>Resultado da Pesquisa</p>
+                        <p className='mt-4 text-primary' style={{ marginBottom: '-15px' }}>Resultado da Pesquisa</p>
                         <hr />
                     </>
                     : <div className='d-flex flex-column justify-content-center align-items-center mt-5'>
@@ -17,7 +17,7 @@ const ListComponent = ({ items }) => {
                     </div>
             }
             <ListGroup>{items}</ListGroup>
-        </>
+        </div>
     );
 }
 
