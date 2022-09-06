@@ -20,6 +20,11 @@ Aplicação para consulta e pesquisa de livros na API do Google Books.
 ## Deploy
 
 Para fazer o deploy desse projeto clone ou baixe o repositório para o seu ambiente de desenvolvimento.
+Para instalar as dependências necessárias do projeto basta rodar o código:
+
+```bash
+  yarn
+```
 Instale as dependências do projeto e após a conclusão rode o comando:
 
 ```bash
